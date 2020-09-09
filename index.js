@@ -118,6 +118,22 @@ Car.prototype.drive = function (distance) {
   }
 };
 
+/* Arrow function
+
+  Car.prototype.drive = distance => {
+    let fuelUsed = distance / this.milesPerGallon;
+    if (this.tank - fuelUsed < 0) {
+      this.odometer += this.tank * this.milesPerGallon;
+      this.tank = 0;
+      return `I ran out of fuel at ${this.odometer} miles!`;
+    } else {
+      this.odometer += distance;
+      this.tank -= fuelUsed;
+    }
+  }
+
+*/
+
 /*
   TASK 3
     - Write a Baby constructor subclassing Person.
@@ -125,7 +141,21 @@ Car.prototype.drive = function (distance) {
     - Besides the methods on Person.prototype, babies have the ability to `.play()`:
         + Should return a string "Playing with x", x being the favorite toy.
 */
-function Baby() {}
+function Baby(name, age, favoriteToy) {
+  Person.call(this, name, age);
+  this.favoriteToy = favoriteToy;
+}
+
+Baby.prototype = Object.create(Person.prototype);
+
+Baby.prototype.play = function () {
+  return `Playing with ${this.favoriteToy}`;
+};
+
+/* Arrow function
+
+  Baby.prototype.play = () => `Playing with ${this.favoriteToy}`
+ */
 
 /* 
   TASK 4
